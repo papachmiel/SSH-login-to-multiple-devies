@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+	set USERNAME "[lindex $argv 1]
+	set PASSWORD "[lindex $argv 2]
+	set IPaddress [lindex $argv 0]
+	spawn ssh $USERNAME@$IPaddress
+	expect "*?assword?" {send "$PASSWORD\r"}
+	expect "*#*" {send "conf t\r"}
+	expect "*?config?*" {send "\\your command\\"}
+	expect "*?config?*" {send "exit\r"}
+	expect "*#*" {send "copy running-config startup-config\r"}
+	expect "*?config?*" {send "\r"}
+	expect "*#*" {send "exit\r"}

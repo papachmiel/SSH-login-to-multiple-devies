@@ -1,0 +1,6 @@
+#!/bin/bash
+while read IPaddress
+do
+	echo $IPaddress
+	expect \\path to Expect script\\ $IPaddress
+done < \\path to file with IP's, credentials\\
